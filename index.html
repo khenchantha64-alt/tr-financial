@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>𝐓𝐑 𝐅𝐢𝐧𝐚𝐧𝐜𝐢𝐚𝐥 𝐒𝐲𝐬𝐭𝐞𝐦 Exchange</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f5f7;color:#172033;font-family:Arial,"Noto Sans Khmer",sans-serif}.wrap{max-width:470px;margin:auto;min-height:100vh;background:#fff}
+header{background:#10243e;color:#fff;padding:20px;border-radius:0 0 24px 24px}.brand{font-size:26px;font-weight:800}.brand span{color:#d4a044}.sub{font-size:12px;opacity:.75;margin-top:4px}.pill{display:inline-block;margin-top:13px;border:1px solid #ffffff35;border-radius:20px;padding:7px 10px;font-size:11px}
+main{padding:18px}.card{border:1px solid #e2e5e9;border-radius:20px;padding:16px;margin-bottom:15px;box-shadow:0 5px 20px #14243d0a}.rate-head{display:flex;justify-content:space-between;align-items:center}.rate-head h3{font-size:16px;margin:0}.updated{font-size:10px;color:#7b828b}
+.currency{border:1px solid #e0e3e7;border-radius:18px;overflow:hidden;margin-top:12px}.crow{display:grid;grid-template-columns:46% 54%;min-height:105px}.cinfo{display:flex;align-items:center;gap:10px;padding:14px;background:#fafafa;border-right:1px solid #e0e3e7}.flag{font-size:28px}.country{font-size:15px}.code{font-size:12px;color:#777;margin-top:4px}.amount{padding:12px 14px;display:flex;flex-direction:column;justify-content:center;text-align:right}.amount input{width:100%;border:0;outline:0;background:transparent;text-align:right;font-size:28px;font-weight:700}.unit{font-size:13px;color:#777;margin-top:5px}.swap{text-align:center;height:0;position:relative;z-index:2}.swap span{display:inline-flex;transform:translateY(-50%);width:38px;height:38px;border:1px solid #e0e3e7;background:#fff;border-radius:50%;align-items:center;justify-content:center;font-size:20px}
+.result{display:flex;justify-content:space-between;align-items:center;background:#f8f9fb;border-radius:13px;padding:12px;margin-top:12px}.result small{color:#737b86}.result b{font-size:20px}.note{font-size:11px;color:#747d89;line-height:1.55}
+input.admin{width:100%;padding:13px;border:1px solid #d9dee5;border-radius:11px;font-size:16px}.adminbtn,.save{width:100%;padding:13px;border:0;border-radius:11px;font-weight:700}.adminbtn{background:#10243e;color:white}.save{background:#c18a2a;color:white;margin-top:12px}.adminpanel{display:none;margin-top:15px}.adminpanel.show{display:block}label{font-size:12px;color:#667085;display:block;margin:12px 0 6px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ok{color:#087443;font-size:12px;margin-top:9px}footer{text-align:center;color:#9aa1aa;font-size:11px;padding:5px 20px 25px}
+@media(max-width:390px){.crow{grid-template-columns:44% 56%}.country{font-size:13px}.amount input{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="brand"><span style="color:#fff">𝐓𝐑 𝐅𝐢𝐧𝐚𝐧𝐜𝐢𝐚𝐥 𝐒𝐲𝐬𝐭𝐞𝐦</span></div><div class="sub">Korea 🇰🇷 → Cambodia 🇰🇭 · Exchange Rate</div></header>
+<main>
+<section class="card">
+<div class="rate-head"><h3>💱 អត្រាប្តូរប្រាក់</h3><span class="updated" id="updated">--</span></div>
+<div class="currency">
+<div class="crow"><div class="cinfo"><span class="flag">🇺🇸</span><div><div class="country">미국 / USA</div><div class="code">USD · US Dollar</div></div></div>
+<div class="amount"><input id="usd" type="number" min="0" value="1" oninput="usdChanged()"><div class="unit">1 달러 / USD</div></div></div>
+<div class="swap"><span>⇄</span></div>
+<div class="crow"><div class="cinfo"><span class="flag">🇰🇷</span><div><div class="country">대한민국 / Korea</div><div class="code">KRW · Korean Won</div></div></div>
+<div class="amount"><input id="krw" type="number" min="0" value="1400" oninput="krwChanged()"><div class="unit">원 / KRW</div></div></div>
+</div>
+<div class="result"><small>Rate របស់ 𝐓𝐑 𝐅𝐢𝐧𝐚𝐧𝐜𝐢𝐚𝐥 𝐒𝐲𝐬𝐭𝐞𝐦</small><b id="rateLabel">1 USD = 1,400 KRW</b></div>
+
+</section>
+
+<section class="card"><h3 style="margin-top:0">🧮 សាកល្បងចំនួនផ្ញើ</h3>
+<label>បញ្ចូលចំនួន KRW</label><input id="calc" class="admin" type="number" min="0" placeholder="ឧ. 1,000,000" oninput="calculate()">
+<div class="result"><small>ទទួលបានប្រហែល</small><b id="out">$0.00 USD</b></div></section>
+
+<section class="card"><button class="adminbtn" onclick="toggleAdmin()">🔐 Admin — គ្រប់គ្រងតែ Admin</button>
+<div id="panel" class="adminpanel"><label>Password សម្រាប់ Admin</label><input id="password" class="admin" type="password" placeholder="បញ្ចូល Password">
+<button class="save" onclick="unlock()">ចូល Admin</button>
+<div id="area" style="display:none"><hr style="border:0;border-top:1px solid #eee;margin:18px 0"><h3>⚙️ កំណត់ Rate</h3>
+<label>1 USD = KRW</label><input id="newRate" class="admin" type="number" min="1" step="any">
+<button class="save" onclick="saveRate()">✓ រក្សាទុក Rate ថ្មី</button><div id="msg"></div>
+<p class="note">Demo នេះរក្សា Rate ក្នុង Browser។ Version Online ពិត គួរប្រើ Server + Database + Secure Login ដើម្បីឱ្យ Admin ម្នាក់គត់អាចកែ Rate បាន។</p></div></div></section>
+</main><footer>𝐓𝐑 𝐅𝐢𝐧𝐚𝐧𝐜𝐢𝐚𝐥 𝐒𝐲𝐬𝐭𝐞𝐦 · KRW ⇄ USD</footer>
+</div>
+<script>
+let rate=Number(localStorage.getItem("tr_rate")||1400);
+let updated=localStorage.getItem("nh_updated")||new Date().toLocaleString();
+function fmt(n){return Number(n).toLocaleString(undefined,{maximumFractionDigits:4})}
+function render(){document.getElementById("rateLabel").textContent="1 USD = "+fmt(rate)+" KRW";document.getElementById("newRate").value=rate;document.getElementById("updated").textContent="Updated "+updated;usdChanged();calculate()}
+function usdChanged(){let u=Number(document.getElementById("usd").value||0);document.getElementById("krw").value=Number((u*rate).toFixed(4))}
+function krwChanged(){let k=Number(document.getElementById("krw").value||0);document.getElementById("usd").value=Number((k/rate).toFixed(6))}
+function calculate(){let k=Number(document.getElementById("calc").value||0);document.getElementById("out").textContent="$"+(k/rate).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})+" USD"}
+function toggleAdmin(){document.getElementById("panel").classList.toggle("show")}
+function unlock(){if(document.getElementById("password").value==="TRFinancial@2026"){document.getElementById("area").style.display="block";sessionStorage.setItem("tr_admin","1")}else alert("Password មិនត្រឹមត្រូវ")}
+function saveRate(){let n=Number(document.getElementById("newRate").value);if(!n||n<=0)return alert("សូមបញ្ចូល Rate ត្រឹមត្រូវ");rate=n;updated=new Date().toLocaleString();localStorage.setItem("tr_rate",rate);localStorage.setItem("nh_updated",updated);document.getElementById("msg").innerHTML='<div class="ok">✓ បានរក្សាទុក: 1 USD = '+fmt(rate)+' KRW</div>';render()}
+render();
+if(sessionStorage.getItem("tr_admin")==="1"){document.getElementById("panel").classList.add("show");document.getElementById("area").style.display="block"}
+</script>
+</body></html>
