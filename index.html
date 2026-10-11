@@ -44,7 +44,7 @@ input.admin{width:100%;padding:13px;border:1px solid #d9dee5;border-radius:11px;
 </main><footer>𝐓𝐑 𝐅𝐢𝐧𝐚𝐧𝐜𝐢𝐚𝐥 𝐒𝐲𝐬𝐭𝐞𝐦 · KRW ⇄ USD</footer>
 </div>
 <script>
-let rate=Number(localStorage.getItem("tr_rate")||1400);
+let rate=Number(localStorage.getItem("tr_rate")||1497.50);
 let updated=localStorage.getItem("nh_updated")||new Date().toLocaleString();
 function fmt(n){return Number(n).toLocaleString(undefined,{maximumFractionDigits:4})}
 function render(){document.getElementById("rateLabel").textContent="1 USD = "+fmt(rate)+" KRW";document.getElementById("newRate").value=rate;document.getElementById("updated").textContent="Updated "+updated;usdChanged();calculate()}
