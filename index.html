@@ -52,7 +52,7 @@ function usdChanged(){let u=Number(document.getElementById("usd").value||0);docu
 function krwChanged(){let k=Number(document.getElementById("krw").value||0);document.getElementById("usd").value=Number((k/rate).toFixed(6))}
 function calculate(){let k=Number(document.getElementById("calc").value||0);document.getElementById("out").textContent="$"+(k/rate).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})+" USD"}
 function toggleAdmin(){document.getElementById("panel").classList.toggle("show")}
-function unlock(){if(document.getElementById("password").value==="TRFinancial@2026"){document.getElementById("area").style.display="block";sessionStorage.setItem("tr_admin","1")}else alert("Password មិនត្រឹមត្រូវ")}
+function unlock(){if(document.getElementById("password").value==="Tharo639*$"){document.getElementById("area").style.display="block";sessionStorage.setItem("tr_admin","1")}else alert("Password មិនត្រឹមត្រូវ")}
 function saveRate(){let n=Number(document.getElementById("newRate").value);if(!n||n<=0)return alert("សូមបញ្ចូល Rate ត្រឹមត្រូវ");rate=n;updated=new Date().toLocaleString();localStorage.setItem("tr_rate",rate);localStorage.setItem("nh_updated",updated);document.getElementById("msg").innerHTML='<div class="ok">✓ បានរក្សាទុក: 1 USD = '+fmt(rate)+' KRW</div>';render()}
 render();
 if(sessionStorage.getItem("tr_admin")==="1"){document.getElementById("panel").classList.add("show");document.getElementById("area").style.display="block"}
