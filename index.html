@@ -1,15 +1,15 @@
 <!DOCTYPE html>
+
 <html lang="km">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TR Financial System - Live Real-Time</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@500;700;800&family=Siemreap&display=swap" rel="stylesheet">
-    
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TR Financial System - Live Real-Time</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&amp;family=Plus+Jakarta+Sans:wght@500;700;800&amp;family=Siemreap&amp;display=swap" rel="stylesheet"/>
+<style>
         * { 
             box-sizing: border-box; 
             font-family: 'Plus Jakarta Sans', 'Noto Sans KR', 'Siemreap', sans-serif; 
@@ -57,13 +57,15 @@
         }
 
         .logo-img {
-            width: 80px;
-            height: 80px;
+            width: 82px;
+            height: 82px;
             object-fit: contain;
-            margin: 0 auto 8px auto;
+            margin: 0 auto 10px auto;
             display: block;
             border-radius: 50%;
-            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 6px 18px rgba(99, 102, 241, 0.35);
+            background: #ffffff;
+            padding: 2px;
         }
 
         .title { 
@@ -200,6 +202,14 @@
             font-weight: 800; 
             font-size: 16px; 
             color: #1e293b;
+        }
+
+        .flag-img { 
+            width: 38px; 
+            height: 26px; 
+            object-fit: cover; 
+            border-radius: 5px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.12);
         }
 
         .currency-info {
@@ -351,106 +361,95 @@
     </style>
 </head>
 <body>
-
 <div class="container">
-    <!-- Header with Brand Logo -->
-    <div class="brand-header">
-        <img class="logo-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&auto=format&fit=crop&q=80" alt="TR Logo">
-        <h1 class="title">TR Financial System</h1>
-        <div class="subtitle">USD ⇄ KRW Fast Exchange</div>
-        <div class="live-status-bar">
-            <span class="pulse-dot"></span>
-            <span id="cloudStatusText">Cloud Live Real-Time Sync</span>
-        </div>
-    </div>
-
-    <!-- Live Date & Time -->
-    <div class="datetime-card">
-        <div class="datetime-left">
-            <span>📅</span>
-            <span id="liveDate">로딩 중...</span>
-        </div>
-        <div class="datetime-right" id="liveTime">
+<!-- Header with Brand Logo -->
+<div class="brand-header">
+<img alt="TR Logo" class="logo-img" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<h1 class="title">TR Financial System</h1>
+<div class="subtitle">USD ⇄ KRW Fast Exchange</div>
+<div class="live-status-bar">
+<span class="pulse-dot"></span>
+<span id="cloudStatusText">Cloud Live Real-Time Sync</span>
+</div>
+</div>
+<!-- Live Date & Time -->
+<div class="datetime-card">
+<div class="datetime-left">
+<span>📅</span>
+<span id="liveDate">로딩 중...</span>
+</div>
+<div class="datetime-right" id="liveTime">
             00:00:00 AM
         </div>
-    </div>
-
-    <!-- Current Live Rate Display -->
-    <div class="rate-banner">
-        <div class="rate-banner-title">អត្រាប្តូរប្រាក់ផ្លូវការបច្ចុប្បន្ន (OFFICIAL RATE)</div>
-        <div class="rate-banner-val" id="rateDisplay">1 USD = 1,404.65 KRW</div>
-    </div>
-
-    <!-- Currency 1: USD -->
-    <div class="currency-card">
-        <div class="row">
-            <div class="flag-label">
-                <svg width="36" height="25" viewBox="0 0 7410 3900" style="border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.15)">
-                    <rect width="7410" height="3900" fill="#b22234"/>
-                    <path d="M0,450H7410M0,1050H7410M0,1650H7410M0,2250H7410M0,2850H7410M0,3450H7410" stroke="#fff" stroke-width="300"/>
-                    <rect width="2964" height="2100" fill="#3c3b6e"/>
-                </svg>
-                <div class="currency-info">
-                    <span>미국</span>
-                    <span class="currency-code">Dollar</span>
-                </div>
-            </div>
-            <input type="number" id="usdInput" value="1" oninput="convertUsdToKrw()" min="0" step="any" placeholder="0">
-        </div>
-        <div class="sub-text" id="usdSub">1 달러</div>
-    </div>
-
-    <!-- Swap / Converter Icon -->
-    <div class="divider-container">
-        <div class="divider-icon" title="Two-Way Currency Conversion">⇄</div>
-    </div>
-
-    <!-- Currency 2: KRW -->
-    <div class="currency-card">
-        <div class="row">
-            <div class="flag-label">
-                <svg width="36" height="25" viewBox="0 0 900 600" style="border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.15); border:1px solid #e2e8f0">
-                    <rect width="900" height="600" fill="#fff"/>
-                    <circle cx="450" cy="300" r="150" fill="#c60c30"/>
-                    <path d="M300,300 A75,75 0 0,0 450,300 A75,75 0 0,1 600,300 A150,150 0 0,1 300,300 Z" fill="#003478"/>
-                </svg>
-                <div class="currency-info">
-                    <span>대한민국</span>
-                    <span class="currency-code">원</span>
-                </div>
-            </div>
-            <input type="number" id="krwInput" value="1404.65" oninput="convertKrwToUsd()" min="0" step="any" placeholder="0">
-        </div>
-        <div class="sub-text" id="krwSub">1,404.65 원</div>
-    </div>
-
-    <!-- Admin Control Panel -->
-    <div class="admin-section">
-        <div class="admin-toggle" onclick="toggleAdminPanel()">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+</div>
+<!-- Current Live Rate Display -->
+<div class="rate-banner">
+<div class="rate-banner-title">អត្រាប្តូរប្រាក់ផ្លូវការបច្ចុប្បន្ន (OFFICIAL RATE)</div>
+<div class="rate-banner-val" id="rateDisplay">1 USD = 1,404.65 KRW</div>
+</div>
+<!-- Currency 1: USD -->
+<div class="currency-card">
+<div class="row">
+<div class="flag-label">
+<svg height="25" style="border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.15)" viewbox="0 0 7410 3900" width="36">
+<rect fill="#b22234" height="3900" width="7410"></rect>
+<path d="M0,450H7410M0,1050H7410M0,1650H7410M0,2250H7410M0,2850H7410M0,3450H7410" stroke="#fff" stroke-width="300"></path>
+<rect fill="#3c3b6e" height="2100" width="2964"></rect>
+</svg>
+<div class="currency-info">
+<span>미국</span>
+<span class="currency-code">Dollar</span>
+</div>
+</div>
+<input id="usdInput" min="0" oninput="convertUsdToKrw()" placeholder="0" step="any" type="number" value="1"/>
+</div>
+<div class="sub-text" id="usdSub">1 달러</div>
+</div>
+<!-- Swap / Converter Icon -->
+<div class="divider-container">
+<div class="divider-icon" title="Two-Way Currency Conversion">⇄</div>
+</div>
+<!-- Currency 2: KRW -->
+<div class="currency-card">
+<div class="row">
+<div class="flag-label">
+<svg height="25" style="border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.15); border:1px solid #e2e8f0" viewbox="0 0 900 600" width="36">
+<rect fill="#fff" height="600" width="900"></rect>
+<circle cx="450" cy="300" fill="#c60c30" r="150"></circle>
+<path d="M300,300 A75,75 0 0,0 450,300 A75,75 0 0,1 600,300 A150,150 0 0,1 300,300 Z" fill="#003478"></path>
+</svg>
+<div class="currency-info">
+<span>대한민국</span>
+<span class="currency-code">원</span>
+</div>
+</div>
+<input id="krwInput" min="0" oninput="convertKrwToUsd()" placeholder="0" step="any" type="number" value="1404.65"/>
+</div>
+<div class="sub-text" id="krwSub">1,404.65 원</div>
+</div>
+<!-- Admin Control Panel -->
+<div class="admin-section">
+<div class="admin-toggle" onclick="toggleAdminPanel()">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
             🔒 កំណត់អត្រាប្តូរប្រាក់ (Admin Panel)
         </div>
-        
-        <!-- Password Form -->
-        <div id="loginForm" class="hidden">
-            <input type="password" id="adminPassword" class="input-box" placeholder="បញ្ចូល Password Admin">
-            <button class="btn" onclick="loginAdmin()">ចូលប្រព័ន្ធ (Unlock)</button>
-        </div>
-
-        <!-- Admin Control -->
-        <div id="adminPanel" class="hidden">
-            <div class="admin-box-title">កំណត់អត្រាប្រាក់ថ្មីទៅកាន់ Cloud (1 USD = ? KRW)</div>
-            <input type="number" id="newRateInput" class="input-box" placeholder="ឧទាហរណ៍: 1405" step="any">
-            <button class="btn btn-success" id="saveRateBtn" onclick="saveCloudRate()">☁️ រក្សាទុក និងផ្សាយបន្តផ្ទាល់ (Sync Live)</button>
-            <div id="syncStatus" class="sync-msg hidden">✓ បាន Update ទៅកាន់អតិថិជនទាំងអស់រួចរាល់!</div>
-        </div>
-    </div>
-
-    <div class="footer-text">
+<!-- Password Form -->
+<div class="hidden" id="loginForm">
+<input class="input-box" id="adminPassword" placeholder="បញ្ចូល Password Admin" type="password"/>
+<button class="btn" onclick="loginAdmin()">ចូលប្រព័ន្ធ (Unlock)</button>
+</div>
+<!-- Admin Control -->
+<div class="hidden" id="adminPanel">
+<div class="admin-box-title">កំណត់អត្រាប្រាក់ថ្មីទៅកាន់ Cloud (1 USD = ? KRW)</div>
+<input class="input-box" id="newRateInput" placeholder="ឧទាហរណ៍: 1405" step="any" type="number"/>
+<button class="btn btn-success" id="saveRateBtn" onclick="saveCloudRate()">☁️ រក្សាទុក និងផ្សាយបន្តផ្ទាល់ (Sync Live)</button>
+<div class="sync-msg hidden" id="syncStatus">✓ បាន Update ទៅកាន់អតិថិជនទាំងអស់រួចរាល់!</div>
+</div>
+</div>
+<div class="footer-text">
         TR Financial System · Real-time Cloud Auto-Sync
     </div>
 </div>
-
 <script>
     // ១. កាលបរិច្ឆេទ និង ម៉ោង Live Auto Update
     function updateDateTime() {
@@ -556,6 +555,7 @@
         btn.disabled = true;
 
         try {
+            // រុញឡើង Cloud
             await fetch(CLOUD_API_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -586,6 +586,5 @@
     fetchLiveRate();
     setInterval(fetchLiveRate, 10000);
 </script>
-
 </body>
 </html>
