@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+
+<html lang="km"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>TR Financial System</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans+KR:wght@400;500;700;900&amp;family=Siemreap&amp;display=swap" rel="stylesheet"/>
+<style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', 'Noto Sans KR', 'Siemreap', sans-serif;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #0b1120;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.20) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(217, 70, 239, 0.16) 0px, transparent 50%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px 12px;
+        }
+
+        .phone-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 440px;
+            border-radius: 36px;
+            padding: 24px 20px 20px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phone-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+        }
+
+        /* Top Header */
+        .header {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .logo-wrap {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #2e1065, #0f172a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+            margin-bottom: 10px;
+            border: 2.5px solid rgba(168, 85, 247, 0.6);
+            overflow: hidden;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .brand-title {
+            font-size: 23px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.4px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 11.5px;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: 999px;
+            margin-top: 6px;
+            border: 1px solid #dbeafe;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            background: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 6px #10b981;
+        }
+
+        /* Time & Date bar */
+        .datetime-bar {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 9px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .date-text {
+            font-size: 12.5px;
+            font-weight: 700;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .time-badge {
+            background: #e0e7ff;
+            color: #3730a3;
+            font-size: 12.5px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Single Official Rate Highlight Banner */
+        .single-rate-banner {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #f0fdfa 100%);
+            border: 1.5px solid #bbf7d0;
+            border-radius: 20px;
+            padding: 14px 16px;
+            text-align: center;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.08);
+            position: relative;
+        }
+
+        .banner-title {
+            font-size: 12.5px;
+            font-weight: 800;
+            color: #15803d;
+            letter-spacing: 0.1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+
+        .banner-rate-val {
+            font-size: 26px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+            margin-bottom: 2px;
+        }
+
+        .banner-sub {
+            font-size: 11px;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        /* Currency Input Cards */
+        .converter-section {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .currency-box {
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 12px 16px;
+            transition: border-color 0.2s;
+        }
+
+        .currency-box:focus-within {
+            border-color: #6366f1;
+        }
+
+        .currency-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .flag-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .flag-svg {
+            width: 38px;
+            height: 26px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.18);
+            display: inline-block;
+            flex-shrink: 0;
+            border: 0.5px solid rgba(0,0,0,0.08);
+        }
+
+        .country-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .country-code {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .currency-input {
+            border: none;
+            background: transparent;
+            font-size: 24px;
+            font-weight: 800;
+            text-align: right;
+            width: 150px;
+            outline: none;
+            color: #1e1b4b;
+        }
+
+        .currency-sub {
+            text-align: right;
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        .swap-circle-btn {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #6366f1;
+            color: white;
+            border: 3px solid #ffffff;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 5;
+            transition: transform 0.2s;
+            font-size: 16px;
+        }
+
+        .swap-circle-btn:active {
+            transform: translate(-50%, -50%) scale(0.92);
+        }
+
+        /* Estimate Calculator Box */
+        .calc-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 22px;
+            padding: 14px 16px;
+            margin-bottom: 14px;
+        }
+
+        .calc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .calc-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .calc-subtitle {
+            font-size: 11px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .two-way-badge {
+            background: #e0e7ff;
+            color: #4338ca;
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 8px;
+        }
+
+        .tab-switch {
+            display: flex;
+            background: #e2e8f0;
+            border-radius: 12px;
+            padding: 3px;
+            gap: 3px;
+            margin-bottom: 10px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: 11.5px;
+            font-weight: 700;
+            padding: 8px 4px;
+            border-radius: 9px;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .tab-btn.active {
+            background: #ffffff;
+            color: #2563eb;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+        }
+
+        .chips-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .chip-btn {
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            font-size: 11.5px;
+            font-weight: 600;
+            color: #334155;
+            padding: 6px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .chip-btn:active {
+            background: #e0e7ff;
+            border-color: #6366f1;
+            color: #4338ca;
+        }
+
+        .custom-input-wrap {
+            position: relative;
+            background: #ffffff;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            margin-bottom: 12px;
+        }
+
+        .custom-input-wrap:focus-within {
+            border-color: #6366f1;
+        }
+
+        .custom-currency-symbol {
+            font-size: 15px;
+            font-weight: 700;
+            color: #64748b;
+            margin-right: 6px;
+        }
+
+        .custom-calc-input {
+            border: none;
+            background: transparent;
+            width: 100%;
+            font-size: 17px;
+            font-weight: 700;
+            color: #0f172a;
+            outline: none;
+        }
+
+        .clear-btn {
+            background: #e2e8f0;
+            border: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: #475569;
+            cursor: pointer;
+            margin-left: 6px;
+        }
+
+        .calc-result-box {
+            background: #ffffff;
+            border: 1px dashed #cbd5e1;
+            border-radius: 14px;
+            padding: 11px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .result-left-lbl {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 700;
+        }
+
+        .result-sub-detail {
+            font-size: 11.5px;
+            color: #64748b;
+            margin-top: 2px;
+            font-weight: 500;
+        }
+
+        .result-right-val {
+            font-size: 22px;
+            font-weight: 800;
+            color: #2563eb;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .applied-rate-hint {
+            font-size: 11px;
+            color: #059669;
+            margin-top: 3px;
+            font-weight: 600;
+        }
+
+        /* Action Buttons */
+        .btn-send {
+            width: 100%;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+
+        .contact-pills {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .pill-link {
+            flex: 1;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            color: #334155;
+            text-decoration: none;
+            padding: 8px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        /* Footer & Admin */
+        .server-status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: #64748b;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f1f5f9;
+            margin-bottom: 10px;
+        }
+
+        .admin-trigger {
+            text-align: center;
+            font-size: 12px;
+            color: #6366f1;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hidden { display: none !important; }
+
+        .admin-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 12px;
+            margin-top: 10px;
+        }
+
+        .admin-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 8px;
+            outline: none;
+            background: #ffffff;
+        }
+
+        .admin-btn {
+            width: 100%;
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .tagline {
+            text-align: center;
+            font-size: 10.5px;
+            color: #94a3b8;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+<div class="phone-card">
+<!-- Header -->
+<div class="header">
+<div class="logo-wrap">
+<img alt="TR Financial Logo" class="logo-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWXDU628yYIIw_NlkTurf8MoFV8pAz4lztPW83ngvNoi2rSZ2gz5UJCAiIynWrAe0-FCrFJlsxSRfa2xTB6D0oLTuHUrnxSkvwqDq88f0nqh5OJKpOCVLt9zTPzUDncrSZahjszF6XaHpVEQM9F9MciFb6cRGS8Ixqre_O2605e0yCjnXsYHqDkncvUEGZTae7MAZENrhMHl-7jH3WF0Kht4ZH-0JjSoiOS-PICdYwN11J6IQy4jS2bA27ES2q0ftYiuA"/>
+</div>
+<h1 class="brand-title">TR Financial System</h1>
+<div class="status-badge">
+<span class="status-dot"></span>
+<span>실시간 공식 환율 · Live Official Rate (24/7)</span>
+</div>
+</div>
+<!-- Live Date and Time -->
+<div class="datetime-bar">
+<div class="date-text" id="liveDate">📅 2026년 10월 14일 수</div>
+<div class="time-badge" id="liveTime">00:00:00 AM</div>
+</div>
+<!-- Single Official Rate Highlight Banner -->
+<div class="single-rate-banner">
+<div class="banner-title">
+<span>⚡ អត្រាប្តូរប្រាក់ផ្លូវការបច្ចុប្បន្ន (OFFICIAL RATE)</span>
+</div>
+<div class="banner-rate-val" id="bannerRateVal">1 USD = 1,510.71 KRW</div>
+<div class="banner-sub">អត្រាផ្ទេរប្រាក់ផ្ទាល់ខ្លួន · Real-time Exchange Guarantee</div>
+</div>
+<!-- Currency Cards -->
+<div class="converter-section">
+<!-- USD Card -->
+<div class="currency-box">
+<div class="currency-row">
+<div class="flag-group">
+<!-- USA Flag SVG -->
+<svg class="flag-svg" viewbox="0 0 7410 3900">
+<rect fill="#b22234" height="3900" width="7410"></rect>
+<path d="M0,450H7410M0,1050H7410M0,1650H7410M0,2250H7410M0,2850H7410M0,3450H7410" stroke="#fff" stroke-width="300"></path>
+<rect fill="#3c3b6e" height="2100" width="2964"></rect>
+<g fill="#fff">
+<g id="s18">
+<g id="s9">
+<g id="s5">
+<g id="s4">
+<path d="M247,90 317,307 134,173h226L177,307z" id="s"></path>
+<use href="#s" y="420"></use>
+<use href="#s" y="840"></use>
+<use href="#s" y="1260"></use>
+</g>
+<use href="#s" y="1680"></use>
+</g>
+<use href="#s4" x="247" y="210"></use>
+</g>
+<use href="#s9" x="494"></use>
+</g>
+<use href="#s18" x="988"></use>
+<use href="#s9" x="1976"></use>
+<use href="#s5" x="2470"></use>
+</g>
+</svg>
+<div>
+<div class="country-title">미국 · USA</div>
+<div class="country-code">Dollar (USD)</div>
+</div>
+</div>
+<input class="currency-input" id="usdVal" min="0" oninput="onUsdChange()" step="any" type="number" value="1"/>
+</div>
+<div class="currency-sub" id="usdSub">1 Dollar</div>
+</div>
+<!-- Swap Button -->
+<button class="swap-circle-btn" onclick="toggleConverterFocus()" title="Switch">
+            ⇄
+        </button>
+<!-- KRW Card -->
+<div class="currency-box">
+<div class="currency-row">
+<div class="flag-group">
+<!-- Official South Korean Flag (Taegeukgi - 태극기) with accurate Trigrams (Geon, Ri, Gam, Gon) -->
+<svg class="flag-svg" viewbox="0 0 900 600">
+<rect fill="#ffffff" height="600" width="900"></rect>
+<!-- Central Taegeuk (Red upper, Blue lower) -->
+<g transform="translate(450,300) rotate(-33.69)">
+<path d="M-150,0 A75,75 0 0,1 0,0 A75,75 0 0,0 150,0 A150,150 0 0,0 -150,0 Z" fill="#cd2e3a"></path>
+<path d="M-150,0 A75,75 0 0,0 0,0 A75,75 0 0,1 150,0 A150,150 0 0,1 -150,0 Z" fill="#0047a0"></path>
+</g>
+<!-- Top-Left Trigram: Geon (☰ 3 solid bars) -->
+<g transform="translate(450,300) rotate(-33.69) translate(-250,0)">
+<rect fill="#000000" height="200" width="20" x="-10" y="-100"></rect>
+<rect fill="#000000" height="200" width="20" x="-34" y="-100"></rect>
+<rect fill="#000000" height="200" width="20" x="14" y="-100"></rect>
+</g>
+<!-- Bottom-Right Trigram: Gon (☷ 3 broken bars) -->
+<g transform="translate(450,300) rotate(-33.69) translate(250,0)">
+<rect fill="#000000" height="90" width="20" x="-10" y="-100"></rect>
+<rect fill="#000000" height="90" width="20" x="-10" y="10"></rect>
+<rect fill="#000000" height="90" width="20" x="-34" y="-100"></rect>
+<rect fill="#000000" height="90" width="20" x="-34" y="10"></rect>
+<rect fill="#000000" height="90" width="20" x="14" y="-100"></rect>
+<rect fill="#000000" height="90" width="20" x="14" y="10"></rect>
+</g>
+<!-- Bottom-Left Trigram: Ri (☲ broken middle bar) -->
+<g transform="translate(450,300) rotate(33.69) translate(-250,0)">
+<rect fill="#000000" height="200" width="20" x="-34" y="-100"></rect>
+<rect fill="#000000" height="90" width="20" x="-10" y="-100"></rect>
+<rect fill="#000000" height="90" width="20" x="-10" y="10"></rect>
+<rect fill="#000000" height="90" width="20" x="14" y="-100"></rect>
+</g>
+<!-- Top-Right Trigram: Gam (☵ solid middle bar) -->
+<g transform="translate(450,300) rotate(33.69) translate(250,0)">
+<rect fill="#000000" height="90" width="20" x="-34" y="-100"></rect>
+<rect fill="#000000" height="90" width="20" x="-34" y="10"></rect>
+<rect fill="#000000" height="200" width="20" x="-10" y="-100"></rect>
+<rect fill="#000000" height="90" width="20" x="14" y="-100"></rect>
+<rect fill="#000000" height="90" width="20" x="14" y="10"></rect>
+</g>
+</svg>
+<div>
+<div class="country-title">대한민국 · KOREA</div>
+<div class="country-code">Won (KRW)</div>
+</div>
+</div>
+<input class="currency-input" id="krwVal" min="0" oninput="onKrwChange()" step="any" type="number" value="1510.71"/>
+</div>
+<div class="currency-sub" id="krwSub">1,510.71원</div>
+</div>
+</div>
+<!-- Transfer Estimate Box -->
+<div class="calc-card">
+<div class="calc-header">
+<div class="calc-title">
+<span>🧮 សាកល្បងគណនាប្រាក់ផ្ញើ</span>
+<span class="calc-subtitle">· Transfer Estimate</span>
+</div>
+<span class="two-way-badge">Two-Way Mode</span>
+</div>
+<!-- Mode Tabs -->
+<div class="tab-switch">
+<button class="tab-btn active" id="tabKrw" onclick="setCalcMode('KRW_TO_USD')">🇰🇷 ផ្ញើ KRW ➔ USD 🇰🇭</button>
+<button class="tab-btn" id="tabUsd" onclick="setCalcMode('USD_TO_KRW')">🇰🇭 ផ្ញើ USD ➔ KRW 🇰🇷</button>
+</div>
+<div class="chips-row" id="quickChips">
+<button class="chip-btn" onclick="setChipAmount(500000)">500,000₩</button>
+<button class="chip-btn" onclick="setChipAmount(1000000)">1,000,000₩</button>
+<button class="chip-btn" onclick="setChipAmount(2000000)">2,000,000₩</button>
+<button class="chip-btn" onclick="setChipAmount(3000000)">3,000,000₩</button>
+<button class="chip-btn" onclick="setChipAmount(5000000)">5,000,000₩</button>
+</div>
+<div class="custom-input-wrap">
+<span class="custom-currency-symbol" id="calcSymbol">₩</span>
+<input class="custom-calc-input" id="calcInput" oninput="recalcEstimate()" type="number" value="1000000"/>
+<button class="clear-btn" onclick="clearCalcInput()" title="Clear">✕</button>
+</div>
+<div class="calc-result-box">
+<div>
+<div class="result-left-lbl" id="calcResultLabel">ទទួលបានប្រហែល · Estimated USD:</div>
+<div class="result-sub-detail" id="calcSubDetail">ទឹកប្រាក់ផ្ញើ · Transfer: 1,000,000 원</div>
+<div class="applied-rate-hint" id="appliedRateHint">អត្រាគិត Rate: 1 USD = 1,510.71 KRW</div>
+</div>
+<div class="result-right-val" id="calcResultVal">$661.94 USD</div>
+</div>
+</div>
+<!-- Action & Contact -->
+<a class="btn-send" href="https://t.me/frank_9396" target="_blank">
+<span>🚀 ផ្ញើប្រាក់ឥឡូវនេះ · Contact &amp; Send</span>
+</a>
+<div class="contact-pills">
+<a class="pill-link" href="tel:+85510241456">
+<span>📞 Hotline: +855 10 241 456</span>
+</a>
+<a class="pill-link" href="https://t.me/frank_9396" target="_blank">
+<span>✈️ Telegram: @frank_9396</span>
+</a>
+</div>
+<div class="server-status-bar">
+<span>🟢 Server Status: <b>Online</b> · Real-time Sync</span>
+<span id="syncCounter">Sync: 0:45</span>
+</div>
+<!-- Admin Panel -->
+<div class="admin-trigger" onclick="toggleAdmin()">
+        ⚙️ កំណត់អត្រាប្តូរប្រាក់ · Admin Panel
+    </div>
+<!-- Admin Login -->
+<div class="admin-box hidden" id="adminLoginBox">
+<input class="admin-input" id="adminPassInput" placeholder="បញ្ចូល Password Admin" type="password"/>
+<button class="admin-btn" onclick="authAdmin()">ចូលផ្ទាំងគ្រប់គ្រង</button>
+</div>
+<!-- Admin Control Panel -->
+<div class="admin-box hidden" id="adminRateBox">
+<div style="font-size:12px;font-weight:700;margin-bottom:6px;color:#1e293b;">កែប្រែ Margin ផ្ញើមកខ្មែរ (KRW):</div>
+<input class="admin-input" id="adminMarginInput" placeholder="Internal Margin" type="number"/>
+<button class="admin-btn" onclick="saveAdminMargin()">រក្សាទុកអត្រាថ្មី</button>
+</div>
+<div class="tagline">
+        TR Financial System · Faster Transfer · Honestly - Truly - Trust
+    </div>
+</div>
+<script>
+    // Live Korean DateTime
+    function updateClock() {
+        const now = new Date();
+        const dateOpts = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' };
+        document.getElementById('liveDate').innerText = '📅 ' + now.toLocaleDateString('ko-KR', dateOpts);
+
+        let hours = now.getHours();
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12 || 12;
+        document.getElementById('liveTime').innerText = `${String(hours).padStart(2, '0')}:${minutes}:${seconds} ${ampm}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Rates State
+    // Base market rate representing live bank rate (1 USD = X KRW)
+    let baseBankRate = 1340.71; 
+    // Margin for Korea to Cambodia (hidden behind the scenes)
+    let marginKoreaToCambodia = localStorage.getItem('tr_margin_k2c') ? parseFloat(localStorage.getItem('tr_margin_k2c')) : 170;
+
+    // Effective rates:
+    // 1. KRW to USD (Korea to Cambodia): baseBankRate + margin (1510.71)
+    let rateKrwToUsd = baseBankRate + marginKoreaToCambodia;
+    // 2. USD to KRW (Cambodia to Korea): Equal to bank rate (1340.71)
+    let rateUsdToKrw = baseBankRate;
+
+    function updateRateDisplays() {
+        rateKrwToUsd = baseBankRate + marginKoreaToCambodia;
+        rateUsdToKrw = baseBankRate;
+
+        // Display banner with the clean official rate (KRW -> USD customer transfer rate)
+        document.getElementById('bannerRateVal').innerText = `1 USD = ${rateKrwToUsd.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} KRW`;
+
+        onUsdChange();
+        recalcEstimate();
+    }
+
+    function onUsdChange() {
+        let u = parseFloat(document.getElementById('usdVal').value) || 0;
+        let rateToUse = (calcMode === 'KRW_TO_USD') ? rateKrwToUsd : rateUsdToKrw;
+        let k = u * rateToUse;
+        document.getElementById('krwVal').value = k.toFixed(2);
+        document.getElementById('usdSub').innerText = `${u.toLocaleString()} Dollar`;
+        document.getElementById('krwSub').innerText = `${k.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}원`;
+    }
+
+    function onKrwChange() {
+        let k = parseFloat(document.getElementById('krwVal').value) || 0;
+        let rateToUse = (calcMode === 'KRW_TO_USD') ? rateKrwToUsd : rateUsdToKrw;
+        let u = rateToUse > 0 ? (k / rateToUse) : 0;
+        document.getElementById('usdVal').value = u.toFixed(2);
+        document.getElementById('usdSub').innerText = `${u.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} Dollar`;
+        document.getElementById('krwSub').innerText = `${k.toLocaleString()}원`;
+    }
+
+    function toggleConverterFocus() {
+        let nextMode = (calcMode === 'KRW_TO_USD') ? 'USD_TO_KRW' : 'KRW_TO_USD';
+        setCalcMode(nextMode);
+    }
+
+    // Calculator Section: Two-Way with two distinct business rates
+    let calcMode = 'KRW_TO_USD';
+
+    function setCalcMode(mode) {
+        calcMode = mode;
+        const tabKrw = document.getElementById('tabKrw');
+        const tabUsd = document.getElementById('tabUsd');
+        const chips = document.getElementById('quickChips');
+        const sym = document.getElementById('calcSymbol');
+
+        if(mode === 'KRW_TO_USD') {
+            tabKrw.classList.add('active');
+            tabUsd.classList.remove('active');
+            sym.innerText = '₩';
+            chips.innerHTML = `
+                <button class="chip-btn" onclick="setChipAmount(500000)">500,000₩</button>
+                <button class="chip-btn" onclick="setChipAmount(1000000)">1,000,000₩</button>
+                <button class="chip-btn" onclick="setChipAmount(2000000)">2,000,000₩</button>
+                <button class="chip-btn" onclick="setChipAmount(3000000)">3,000,000₩</button>
+                <button class="chip-btn" onclick="setChipAmount(5000000)">5,000,000₩</button>
+            `;
+            document.getElementById('calcInput').value = '1000000';
+            document.getElementById('calcResultLabel').innerText = 'ទទួលបានប្រហែល · Estimated USD:';
+        } else {
+            tabUsd.classList.add('active');
+            tabKrw.classList.remove('active');
+            sym.innerText = '$';
+            chips.innerHTML = `
+                <button class="chip-btn" onclick="setChipAmount(100)">$100</button>
+                <button class="chip-btn" onclick="setChipAmount(500)">$500</button>
+                <button class="chip-btn" onclick="setChipAmount(1000)">$1,000</button>
+                <button class="chip-btn" onclick="setChipAmount(2000)">$2,000</button>
+                <button class="chip-btn" onclick="setChipAmount(5000)">$5,000</button>
+            `;
+            document.getElementById('calcInput').value = '1000';
+            document.getElementById('calcResultLabel').innerText = 'ទទួលបានប្រហែល · Estimated KRW:';
+        }
+        recalcEstimate();
+        onUsdChange();
+    }
+
+    function setChipAmount(amt) {
+        document.getElementById('calcInput').value = amt;
+        recalcEstimate();
+    }
+
+    function clearCalcInput() {
+        document.getElementById('calcInput').value = '';
+        recalcEstimate();
+    }
+
+    function recalcEstimate() {
+        let val = parseFloat(document.getElementById('calcInput').value) || 0;
+        const hintEl = document.getElementById('appliedRateHint');
+
+        if(calcMode === 'KRW_TO_USD') {
+            // Mode 1: Korea to Cambodia: KRW -> USD
+            let res = rateKrwToUsd > 0 ? (val / rateKrwToUsd) : 0;
+            document.getElementById('calcResultVal').innerText = `$${res.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} USD`;
+            document.getElementById('calcSubDetail').innerText = `ទឹកប្រាក់ផ្ញើ · Transfer: ${val.toLocaleString()} 원 (KRW ➔ USD)`;
+            hintEl.innerText = `អត្រាគិត Rate: 1 USD = ${rateKrwToUsd.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} KRW`;
+        } else {
+            // Mode 2: Cambodia to Korea: USD -> KRW using Bank Rate
+            let res = val * rateUsdToKrw;
+            document.getElementById('calcResultVal').innerText = `${res.toLocaleString('en-US', {maximumFractionDigits: 0})} ₩`;
+            document.getElementById('calcSubDetail').innerText = `ទឹកប្រាក់ផ្ញើ · Transfer: $${val.toLocaleString()} USD (USD ➔ KRW)`;
+            hintEl.innerText = `អត្រាគិត Rate: 1 USD = ${rateUsdToKrw.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} KRW`;
+        }
+    }
+
+    // Admin Auth & Controls
+    function toggleAdmin() {
+        const login = document.getElementById('adminLoginBox');
+        const rate = document.getElementById('adminRateBox');
+        if(!rate.classList.contains('hidden')) {
+            rate.classList.add('hidden');
+        } else {
+            login.classList.toggle('hidden');
+        }
+    }
+
+    function authAdmin() {
+        const pass = document.getElementById('adminPassInput').value;
+        if(pass === 'Tharo639$') {
+            document.getElementById('adminLoginBox').classList.add('hidden');
+            document.getElementById('adminRateBox').classList.remove('hidden');
+            document.getElementById('adminMarginInput').value = marginKoreaToCambodia;
+            document.getElementById('adminPassInput').value = '';
+        } else {
+            alert('Password មិនត្រឹមត្រូវ!');
+        }
+    }
+
+    function saveAdminMargin() {
+        let m = parseFloat(document.getElementById('adminMarginInput').value);
+        if(!isNaN(m)) {
+            marginKoreaToCambodia = m;
+            localStorage.setItem('tr_margin_k2c', marginKoreaToCambodia);
+            updateRateDisplays();
+            alert('រក្សាទុកអត្រាថ្មីជោគជ័យ!');
+            document.getElementById('adminRateBox').classList.add('hidden');
+        }
+    }
+
+    // Auto Sync counter
+    let secLeft = 45;
+    setInterval(() => {
+        secLeft--;
+        if(secLeft <= 0) {
+            secLeft = 60;
+            baseBankRate = 1340.71 + (Math.random() * 1.5 - 0.75);
+            updateRateDisplays();
+        }
+        document.getElementById('syncCounter').innerText = `Sync: 0:${String(secLeft).padStart(2, '0')}`;
+    }, 1000);
+
+    updateRateDisplays();
+</script>
+</body></html>
